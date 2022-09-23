@@ -9,10 +9,12 @@ class NovaTarefa extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blue[100],
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.symmetric(horizontal: 100),
             child: TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
@@ -22,7 +24,9 @@ class NovaTarefa extends StatelessWidget {
               controller: controller,
             ),
           ),
-
+          
+          SizedBox(height: 20,),
+          
           //Botões
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,

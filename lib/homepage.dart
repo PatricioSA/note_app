@@ -12,15 +12,15 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   TextEditingController controller = new TextEditingController();
 
-  List listaTarefas = [
+  List toDoList = [
     ['Tarefas', false]
   ];
 
-  void salvarNovaTarefa() {
+  void saveNewTask() {
     setState(() {
       if(controller.text == '') {}
       else {
-        listaTarefas.add([controller.text, false]);
+        toDoList.add([controller.text, false]);
         controller.clear();
         Navigator.of(context).pop();
       }
@@ -37,30 +37,33 @@ class _HomePageState extends State<HomePage> {
         title: Text('Lista de Tarefas'),
       ),
       body: ListView.builder(
-        itemCount: listaTarefas.length,
+        itemCount: toDoList.length,
         itemBuilder: (context, index) {
           return Notas(
-            taskName: listaTarefas[index][0],
-            taskCompleted: listaTarefas[index][1],
+            taskName: toDoList[index][0],
+            taskCompleted: toDoList[index][1],
             onChanged: (bool? valor) {
               setState(() {
-                listaTarefas[index][1] = valor!;
+                toDoList[index][1] = valor!;
               });
             },
           );
         },
       ),
-      bottomNavigationBar: ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => NovaTarefa(
-                  onPressed: salvarNovaTarefa, controller: controller),
-            ),
-          );
-        },
-        child: Text('Adicionar'),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(20),
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => NovaTarefa(
+                    onPressed: saveNewTask, controller: controller),
+              ),
+            );
+          },
+          child: Icon(Icons.add),
+        ),
       ),
     );
   }
