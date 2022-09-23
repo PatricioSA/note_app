@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/page_adicionar_tarefa.dart';
+import 'package:note_app/util/notas.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -8,23 +10,20 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  TextEditingController _controller = new TextEditingController();
+  TextEditingController controller = new TextEditingController();
 
-  List tarefas = ['Teste1', 'Teste2'];
+  List listaTarefas = [
+    ['Tarefas', false]
+  ];
 
-  void criarTarefa() {
+  void salvarNovaTarefa() {
     setState(() {
-      Padding(
-        padding: const EdgeInsets.only(left: 25, top: 25, right: 25),
-        child: Container(
-          color: Colors.blue,
-          child: CheckboxListTile(
-            title: Text(tarefas[0]),
-            value: false,
-            onChanged: ((value) {}),
-          ),
-        ),
-      );
+      if(controller.text == '') {}
+      else {
+        listaTarefas.add([controller.text, false]);
+        controller.clear();
+        Navigator.of(context).pop();
+      }
     });
   }
 
@@ -37,30 +36,31 @@ class _HomePageState extends State<HomePage> {
         elevation: 1,
         title: Text('Lista de Tarefas'),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            TextField(
-              keyboardType: TextInputType.text,
-              controller: _controller,
+      body: ListView.builder(
+        itemCount: listaTarefas.length,
+        itemBuilder: (context, index) {
+          return Notas(
+            taskName: listaTarefas[index][0],
+            taskCompleted: listaTarefas[index][1],
+            onChanged: (bool? valor) {
+              setState(() {
+                listaTarefas[index][1] = valor!;
+              });
+            },
+          );
+        },
+      ),
+      bottomNavigationBar: ElevatedButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => NovaTarefa(
+                  onPressed: salvarNovaTarefa, controller: controller),
             ),
-            ElevatedButton(
-              onPressed: criarTarefa,
-              child: Text('Adicionar'),
-            ),
-            // Padding(
-            //   padding: const EdgeInsets.only(left: 25, top: 25, right: 25),
-            //   child: Container(
-            //     color: Colors.blue,
-            //     child: CheckboxListTile(
-            //       title: Text(tarefas[0]),
-            //       value: false,
-            //       onChanged: ((value) {}),
-            //     ),
-            //   ),
-            // ),
-          ],
-        ),
+          );
+        },
+        child: Text('Adicionar'),
       ),
     );
   }
