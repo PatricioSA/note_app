@@ -10,7 +10,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  TextEditingController controller = new TextEditingController();
+  TextEditingController controller = TextEditingController();
 
   List toDoList = [
     ['Tarefas', false]
@@ -18,8 +18,8 @@ class _HomePageState extends State<HomePage> {
 
   void saveNewTask() {
     setState(() {
-      if(controller.text == '') {}
-      else {
+      if (controller.text == '') {
+      } else {
         toDoList.add([controller.text, false]);
         controller.clear();
         Navigator.of(context).pop();
@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         centerTitle: true,
         elevation: 1,
-        title: Text('Lista de Tarefas'),
+        title: const Text('Lista de Tarefas'),
       ),
       body: ListView.builder(
         itemCount: toDoList.length,
@@ -50,20 +50,17 @@ class _HomePageState extends State<HomePage> {
           );
         },
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(20),
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => NovaTarefa(
-                    onPressed: saveNewTask, controller: controller),
-              ),
-            );
-          },
-          child: Icon(Icons.add),
-        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  NovaTarefa(onPressed: saveNewTask, controller: controller),
+            ),
+          );
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

@@ -14,9 +14,9 @@ class NovaTarefa extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 100),
+            padding: const EdgeInsets.symmetric(horizontal: 50),
             child: TextField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Adicionar Tarefa'
               ),
@@ -25,7 +25,7 @@ class NovaTarefa extends StatelessWidget {
             ),
           ),
           
-          SizedBox(height: 20,),
+          const SizedBox(height: 20,),
           
           //Botões
           Row(
