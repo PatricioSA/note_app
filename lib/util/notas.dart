@@ -17,7 +17,7 @@ class Notas extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: Colors.blue,
+          color: Color.fromARGB(1000, 145, 71, 255),
           borderRadius: BorderRadius.circular(12),
         ),
 

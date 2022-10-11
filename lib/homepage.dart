@@ -30,8 +30,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue[100],
+      backgroundColor: Color.fromARGB(255, 14, 14, 16),
       appBar: AppBar(
+        backgroundColor: Color.fromARGB(1000, 145, 71, 255),
         centerTitle: true,
         elevation: 1,
         title: const Text('Lista de Tarefas'),
